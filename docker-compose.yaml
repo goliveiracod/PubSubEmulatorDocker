@@ -1,0 +1,15 @@
+version: "3.9"
+services:
+  pubsub-emulator:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8085:8085"
+  terraform:
+    image: hashicorp/terraform:latest
+    volumes:
+      - .:/app
+    working_dir: /app
+    depends_on:
+      - pubsub-emulator
